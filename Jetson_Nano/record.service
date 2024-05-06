@@ -1,0 +1,9 @@
+[Unit]
+Description=The function of this system unit is to record on boot.
+
+[Service]
+Type=simple
+ExecStart=./usr/home/DataCollection/out
+
+[Install]
+WantedBy=multi-user.target
