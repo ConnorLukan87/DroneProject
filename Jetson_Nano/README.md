@@ -12,6 +12,7 @@ cd ~ && mkdir "DataCollection"
 Move the "record.cpp" file and "record_n_seconds.sh" file into the "DataCollection" directory:
 
 mv /path_to_this_repo/Jetson_Nano/record.cpp DataCollection/
+
 mv /path_to_this_repo/Jetson_Nano/record_n_seconds.sh DataCollection/
 
 Move into the "DataCollection" directory:
