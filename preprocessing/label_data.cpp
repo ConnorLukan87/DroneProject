@@ -385,7 +385,7 @@ std::vector<std::pair<std::string, std::string>> getIntersection(std::vector<std
             noIR_seconds_to_files[s+i] = filename;
         }
     }
-    // if there's an optical file +- 2 seoonds within any noIR file, add dat shit
+    // if there's an optical file +- 2 seoonds within any noIR file, add it
     std::vector<std::pair<std::string, std::string>> intersection_set;
 
     for (std::string optical_file : optical_files)
