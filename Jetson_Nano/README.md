@@ -7,7 +7,7 @@
 
 In the home directory on the Jetson Nano, make a folder called "DataCollection":
 
-cd ~ && mkdir "DataCollection"
+cd ~ && mkdir DataCollection
 
 Move the "record.cpp" file and "record_n_seconds.sh" file into the "DataCollection" directory:
 
@@ -49,6 +49,6 @@ nvgstcapture-1.0 --sensor-id=ID
 
 Where "ID" is the sensor id you would like to sample from.
 
-2. Make sure to check how much disk space is on the Nano before recording. Should you run out of disk space, the program will keep on recording and likely corrupt the operating system. (This has happened, not fun.)
+2. Make sure to check how much disk space is on the Nano before recording. Should you run out of disk space, the program will keep on recording and likely corrupt the operating system.
 
 3. Make sure the cameras are connected to the MIPI-CSI ports as defined by the program. Failure to do so will result in wrong filenames after collecting data.
