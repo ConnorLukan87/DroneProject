@@ -43,7 +43,7 @@ sudo systemctl stop record.service
 
 ## Helpful tips:
 
-1. A quick way to test if the cameras are recording is to run the command:
+1. A quick way to test if the cameras are ready to record is to run the command:
 
 nvgstcapture-1.0 --sensor-id=ID
 
