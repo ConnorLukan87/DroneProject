@@ -1,7 +1,8 @@
 # This directory contains:
 
 1. An interactive python notebook "rotate_images.ipynb" that is used to augment the data
-2. Another python notebook "training_and_test.ipynb" that is used for just what you think.
+2. Another python notebook "training_and_test.ipynb" that is used for training the 512x640 model
+3. A python notebook "training_and_test2.ipynb" that shows what I tried for the high resolution model.
 
 ## Data augmentation
 
@@ -17,13 +18,12 @@ The focal length, lens settings, and other paramters that can vary from camera t
 
 In the ideal case (same field of view for every camera), you would be able to stack all three photos (thermal, NoIR, Optical) on top of each other and you would be looking at the same scene in all of them. Now consider slicing the stack into a KxN grid. There are (KN)! many permutations of this grid. Enumerate through these, and add them to the train set.
 
-
-## The model
+## The initial model
 
 The input of the image to image translation model consists of the NoIR, Optical, and image subtraction stacked on top of each other in that order. The model is an implementation of pix2pix, a GAN that seeks to solve the same problem as ours. Details are listed in the pix2pix paper here: https://arxiv.org/pdf/1611.07004
 
 
-## Training the model
+## Training the model (512x640x3 output)
 
 We seek to learn a mapping from the input NoIR/Optical image to an output that is indistinguishable from the true thermal image.
 
@@ -38,6 +38,13 @@ In order to get a grasp of how well the output of the thermal imaging model corr
 
 To be clear, the percent difference that I compute is the sum of the magnitude of percent differences for each test example. It suffices to say that this is an upper bound for the magnitude of true population percent difference.
 
+## Idea for high resolution
+
+The basis of this idea comes from the fact that, in one of the high resolution NoIR or Optical images, a small 6x6 region of pixels accounts for approximately a 3x3 region in the thermal image of the same thing. So I tried to train a smaller network with input size 6x6 with 6 channels, with output size 3x3 with 3 channels. After being trained, one could slide that filter across the input image, and get a (3875 - 6 + 1) x (2825 - 6 + 1) resolution output. 
+
+It goes without saying that, since the pixel instensities in the thermal image are scaled relative to each other, one would need some statistics from the entire input image that are sufficient to infer the scaling. This is not implemented in the "train_and_test2.ipynb" file, mainly because the images were taken under the same conditions. One could implement this by adding a few more input neurons in one of the network architectures I tried, or training a seperate network alongside one of my original models.
+
+One difficulty I see with this is how accurately I can collect 6x6 to 3x3 training examples. The predictive performance of the trained model will depend entirely on this, so I tried not to add regions to the train set unless I was absolutely certain of the integrity of the example. If another capstone team were to continue this idea, then I would recommend collecting more examples.
 
 ## What has been tested
 
